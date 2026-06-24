@@ -87,37 +87,31 @@
 
 | מה | איפה |
 |----|------|
-| **הנתונים עצמם** (טיולים, מקומות, משתמשים…) | SQL Server LocalDB / SQL Server Express — מקומית על המחשב |
+| **הנתונים עצמם** (טיולים, מקומות, משתמשים…) | גיבוי `Database/projectTripDB.bak` ב-[TravelIsrael-dotnet](https://github.com/injosh2026/TravelIsrael-dotnet) — שחזור ב-SSMS |
 | **מבנה הטבלאות (Schema)** | EF Core Migrations — בתיקייה `ProjectTripsDB/Migrations/` ב-repo **[TravelIsrael-dotnet](https://github.com/injosh2026/TravelIsrael-dotnet)** |
 | **משתמש Admin ראשוני** | נוצר אוטומטית ב-Migration (Seed) |
 
 ### איך מריצים עם נתונים?
 
-**שלב 1 — יצירת מסד וטבלאות (חובה):**
+**שלב 1 — שחזור מסד עם נתונים (מומלץ):**
+
+1. Clone את [TravelIsrael-dotnet](https://github.com/injosh2026/TravelIsrael-dotnet)
+2. ב-SSMS: **Restore Database** מ-`Database/projectTripDB.bak` → שם: `ProjectTripsDB`
+3. פירוט: [Database/README.md](https://github.com/injosh2026/TravelIsrael-dotnet/blob/main/Database/README.md)
+
+**שלב 1 (חלופי) — רק טבלאות + Admin, בלי נתוני דוגמה:**
 
 ```bash
-# מתוך repository של ה-Backend (TravelIsrael-dotnet)
 dotnet ef database update --project ProjectTripsDB --startup-project ProjectTrips
 ```
-
-פעולה זו יוצרת את `ProjectTripsDB` ואת כל הטבלאות.  
-לאחריה קיים משתמש Admin ראשוני:
 
 | שדה | ערך |
 |-----|-----|
 | Email | `Admin@gmail.com` |
 | Password | `Admin#613` |
 
-**שלב 2 — נתוני דוגמה (טיולים, ביקורות וכו'):**
-
-כרגע **אין** קובץ גיבוי (`.bak` / `.bacpac`) ב-repository.  
-כדי לראות תוכן באפליקציה, יש שתי אפשרויות:
-
-1. **להזין נתונים דרך האפליקציה** — הרשמה, יצירת טיולים, הוספת מקומות (Admin)
-2. **להריץ סקריפטי SQL** — אם יסופקו ב-repo של ה-Backend (תיקיית `Database/` / `Scripts/`)
-
-> **חשוב:** Connection String מוגדר ב-Backend בקובץ `ProjectTripsDB/Models/ProjectTripsDataBase.cs`.  
-> אם SQL Server שלך רץ על שרת אחר — עדכני את השורה בהתאם לפני הרצת Migrations.
+> **חשוב:** Connection String מוגדר ב-Backend ב-`ProjectTripsDB/Models/ProjectTripsDataBase.cs`.  
+> אם SQL Server שלך רץ על שרת אחר — עדכני לפני שחזור/הרצת Migrations.
 
 ---
 
@@ -163,7 +157,7 @@ npm install
 ### 3. הרצת Backend + DB
 
 1. Clone את [TravelIsrael-dotnet](https://github.com/injosh2026/TravelIsrael-dotnet)
-2. הריצי Migrations (ראו [מסד הנתונים](#מסד-הנתונים))
+2. שחזרי מ-`Database/projectTripDB.bak` (ראו [מסד הנתונים](#מסד-הנתונים))
 3. הריצי את שרת ה-API:
 
 ```bash
