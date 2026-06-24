@@ -305,6 +305,10 @@ const baseURL = 'https://localhost:7081/api';
 
 ![Admin - מקומות](docs/screenshots/18-admin-places.png)
 
+**טיולים ממתינים לאישור** (`/admin/trips/pending`)
+
+![Admin - טיולים ממתינים](docs/screenshots/21-admin-pending-trips.png)
+
 ---
 
 ## מבנה הפרויקט
