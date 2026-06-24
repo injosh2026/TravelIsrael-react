@@ -3,6 +3,7 @@ export const Paths = {
   login: 'login',
   register: 'register',
   user: 'me',
+  myTrips: 'my-trips',
   trips: 'trips',
   tripsDetail: 'trips/:id',
   tripPlan: 'tripPlan',

@@ -109,9 +109,7 @@ export default function AdminDashboard() {
     ];
 
     const handleNavigation = (link: string): void => {
-        // כאן תוסיף את הלוגיקה לניווט
-        console.log(`Navigating to: ${link}`);
-        navigate(`${link}`)
+        navigate(link);
     };
 
 

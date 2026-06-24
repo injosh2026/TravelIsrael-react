@@ -58,8 +58,8 @@ export default function AdminPlacesPage() {
     return matchesStatus && matchesSearch && matchesType && matchesRegion;
   });
 
-  const handleEdit = (place: AllPlacesType) => console.log('edit', place.id);
-  const handleRestore = (place: AllPlacesType) => console.log('restore', place.id);
+  const handleEdit = (place: AllPlacesType) => handleView(place);
+  const handleRestore = (place: AllPlacesType) => handleApprove(place);
 
   const openRejectReasonModal = (place: AllPlacesType) => {
     setRejectReasonModal(place);
@@ -86,7 +86,6 @@ export default function AdminPlacesPage() {
   };
 
   const confirmDelete = () => {
-    console.log('Deleting place:', deleteModal?.id);
     setDeleteModal(null);
   };
 
@@ -99,12 +98,10 @@ export default function AdminPlacesPage() {
         await approvePlace(rejectModal.id, { approvalStatus: 3, rejectReason });
       setPlaces(prev => prev.map(item => item.id === rejectModal.id && item.itemType === rejectModal.itemType ? { ...item, status: "rejected", rejectReason } : item));
 
-      console.log(`הטיול "${rejectModal.name}" נדחה בהצלחה!`);
       setRejectModal(null);
       setRejectReason('');
     } catch (err) {
       console.error(err);
-      console.log('שגיאה בדחיית טיול');
     }
 
   };
@@ -119,18 +116,14 @@ export default function AdminPlacesPage() {
 
       // עדכון UI בלי ריפרש
       setPlaces(prev =>
-        prev.map(item => {
-          console.log("COMPARE:", item.id, place.id, item.itemType, place.itemType);
-
-          return item.id === place.id && item.itemType === place.itemType
+        prev.map(item =>
+          item.id === place.id && item.itemType === place.itemType
             ? { ...item, status: "approved", rejectReason: null }
-            : item;
-        })
+            : item
+        )
       );
-      console.log(`הטיול "${place.name}" אושר בהצלחה!`);
     } catch (err) {
       console.error(err);
-      console.log('שגיאה באישור טיול');
     }
   };
 

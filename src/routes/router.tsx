@@ -20,6 +20,7 @@ import AdminPendingTripsPage from '../pages/AdminPendingTripsPage';
 import AdminPlacesPage from '../pages/AdminPlacesPage';
 import AdminUsersPage from '../pages/AdminUsersPage';
 import BuildTripPage from '../pages/BuildTripPage';
+import MyTripsPage from '../pages/MyTripsPage';
 
 const Routes = () => {
   const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const Routes = () => {
         {
           path: Paths.user,
           element: <AuthGuard><PersonalArea /></AuthGuard>,
+        },
+        {
+          path: Paths.myTrips,
+          element: <AuthGuard><MyTripsPage /></AuthGuard>,
         },
         {
           path: Paths.tripPlan,

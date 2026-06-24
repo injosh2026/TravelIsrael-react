@@ -53,14 +53,10 @@ export default function AdminPendingTripsPage() {
   const handleApprove = async (trip: PendingTripType) => {
     try {
       await approveDayTripWithItems(trip.id, { approvalStatus: 2, rejectReason: null });
-      // עדכון UI בלי ריפרש
       setPendingTrips(prev => prev.filter(t => t.id !== trip.id));
     } catch (err) {
       console.error(err);
-      console.log('שגיאה באישור טיול');
-
     }
-    console.log(`הטיול "${trip.name}" אושר בהצלחה!`);
   };
 
   const handleReject = (trip: PendingTripType) => {
@@ -73,12 +69,10 @@ export default function AdminPendingTripsPage() {
       if (!rejectModal) return;
       await approveDayTripWithItems(rejectModal.id, { approvalStatus: 3, rejectReason });
       setPendingTrips(prev => prev.filter(t => t.id !== rejectModal.id));
-      console.log(`הטיול "${rejectModal.name}" נדחה בהצלחה!`);
       setRejectModal(null);
       setRejectReason('');
     } catch (err) {
       console.error(err);
-      console.log('שגיאה בדחיית טיול');
     }
 
   };

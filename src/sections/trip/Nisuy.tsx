@@ -1,7 +1,6 @@
 import { useMemo } from "react"
 import type { DayTripDetailType } from "../../types/dayTripDetail.type"
 import { Clock, Download, MapPin } from "lucide-react"
-import { Link } from "react-router-dom"
 import { calculateDistances, calculateStopsTimes, formatDuration } from "../../utils/calculateTimeTrip"
 import { getTypeStyle } from "../../utils/getTypeColor"
 
@@ -10,14 +9,6 @@ interface Props {
 }
 
 export default function Nisuy({ trip }: Props) {
-
-    const getLink = (stop: any) => {
-        if (stop.itemType === 'Route') {
-            return `/trailDetails`;
-        }
-
-        return `/placeDetails`;
-    };
 
     const stopTimes = useMemo(
         () => calculateStopsTimes(trip),
@@ -53,12 +44,10 @@ export default function Nisuy({ trip }: Props) {
                                     const style = getTypeStyle(typeName);
 
                                     return (
-                                        < Link
+                                        <div
                                             key={index}
-                                            to={getLink(stop)}
-                                            className="block"
+                                            className="border border-[#e5e7eb] rounded-sm overflow-hidden hover:border-[#d1d5db] transition-all"
                                         >
-                                            <div key={index} className="border border-[#e5e7eb] rounded-sm overflow-hidden hover:border-[#d1d5db] transition-all">
                                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                                     <div className="md:col-span-1">
                                                         <div className="relative aspect-[4/3] md:aspect-square">
@@ -106,8 +95,7 @@ export default function Nisuy({ trip }: Props) {
 
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </Link>
+                                        </div>
                                     )
                                 })}
                             </div>

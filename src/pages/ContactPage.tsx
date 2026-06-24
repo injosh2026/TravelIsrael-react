@@ -13,8 +13,8 @@ export default function ContactPage() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // כאן תוסיף את הלוגיקה לשליחת הטופס
         setIsSubmitted(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
         setTimeout(() => setIsSubmitted(false), 3000);
     };
 
