@@ -215,31 +215,107 @@ const baseURL = 'https://localhost:7081/api';
 
 ## צילומי מסך
 
-> *בקרוב — צילומי מסך יתווספו לכאן.*
+### דף בית וגלישה
 
-**מסכים מומלצים לצילום:**
+**דף בית** (`/home`)
 
-| # | מסך | נתיב | למה לצלם |
-|---|-----|------|----------|
-| 1 | דף בית | `/home` | Hero + טיולים מובילים |
-| 2 | רשימת טיולים | `/trips` | סינון וחיפוש |
-| 3 | פרטי טיול | `/trips/:id` | גלריה, תחנות, ביקורות |
-| 4 | אשף תכנון | `/tripPlan` | שלבי הבחירה |
-| 5 | תוצאות המלצות | `/planningResultPage` | טיולים מומלצים |
-| 6 | בניית טיול | `/BuildTrip` | עורך המסלול |
-| 7 | אזור אישי | `/me` | פרופיל וסטטיסטיקות |
-| 8 | Admin Dashboard | `/admin/dashboard` | סטטיסטיקות |
-| 9 | טיולים ממתינים | `/admin/trips/pending` | תהליך אישור |
+![דף בית](docs/screenshots/01-home.png)
 
-שמרי את הקבצים בתיקייה `docs/screenshots/` — נוסיף אותם ל-README לאחר שתצרפי.
+**רשימת טיולים + סינון** (`/trips`)
+
+![רשימת טיולים](docs/screenshots/02-trips-catalog.png)
+
+---
+
+### פרטי טיול
+
+**כרטיס טיול** (`/trips/:id`)
+
+![פרטי טיול - כרטיס](docs/screenshots/03-trip-details-hero.png)
+
+![פרטי טיול - מידע](docs/screenshots/19-trip-details-cards.png)
+
+**תחנות במסלול**
+
+![תחנות במסלול](docs/screenshots/04-trip-stops.png)
+
+![תחנה במסלול](docs/screenshots/05-trip-stop-knesset.png)
+
+**גלריה, מפה וביקורות**
+
+![גלריית תמונות](docs/screenshots/07-trip-gallery.png)
+
+![מפת הטיול](docs/screenshots/06-trip-map.png)
+
+![ביקורות](docs/screenshots/08-trip-reviews.png)
+
+![רשימת ביקורות](docs/screenshots/09-trip-reviews-list.png)
+
+---
+
+### אשף תכנון טיול
+
+**בחירת אזור** (`/tripPlan`)
+
+![אשף - אזור](docs/screenshots/10-wizard-region.png)
+
+**רמת קושי**
+
+![אשף - קושי](docs/screenshots/11-wizard-difficulty.png)
+
+**העדפות מיוחדות**
+
+![אשף - העדפות](docs/screenshots/12-wizard-preferences.png)
+
+**סיכום + תוצאות**
+
+![אשף - סיכום](docs/screenshots/13-wizard-summary.png)
+
+![תוצאות המלצות](docs/screenshots/20-planning-results.png)
+
+---
+
+### בניית טיול אישי
+
+**טופס פרטי הטיול** (`/BuildTrip`)
+
+![בניית טיול - טופס](docs/screenshots/14-build-trip-form.png)
+
+**תחנות המסלול**
+
+![בניית טיול - תחנות](docs/screenshots/15-build-trip-stations.png)
+
+---
+
+### אזור אישי
+
+**פרופיל וסטטיסטיקות** (`/me`)
+
+![אזור אישי](docs/screenshots/16-personal-area.png)
+
+---
+
+### פאנל ניהול (Admin)
+
+**Dashboard** (`/admin/dashboard`)
+
+![Admin Dashboard](docs/screenshots/17-admin-dashboard.png)
+
+**ניהול מקומות** (`/admin/places`)
+
+![Admin - מקומות](docs/screenshots/18-admin-places.png)
 
 ---
 
 ## מבנה הפרויקט
 
 ```
-src/
-├── auth/           # Auth Context, Guards, JWT utilities
+ProjectTrips/
+├── docs/
+│   └── screenshots/   # צילומי מסך לתיעוד
+├── public/
+├── src/
+│   ├── auth/           # Auth Context, Guards, JWT utilities
 ├── component/      # קומפוננטות משותפות
 ├── hooks/          # Custom React hooks
 ├── layouts/        # Layout, NavBar, Footer, AdminLayout
