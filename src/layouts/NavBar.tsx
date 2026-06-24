@@ -3,16 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { User, LogOut } from 'lucide-react';
 import { IoHeartOutline } from 'react-icons/io5';
 import { useAuthContext } from '../auth/useAuthContext';
-import logo from "../assets/TransparentRectangularLogo.png"; // שים לב לנתיב לפי הקובץ שלך
+import logo from "../assets/TransparentRectangularLogo.png";
 
 export default function NavBar() {
     const navigate = useNavigate();
     const { user, logout} = useAuthContext();
     const [open, setOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
-    // const [selectedImage, setSelectedImage] = useState('');
 
-    // סגירה בלחיצה מחוץ
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -26,7 +24,6 @@ export default function NavBar() {
     return (
         <nav className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-                {/* <div className="text-2xl font-semibold text-gray-900">טיולון</div> */}
                 <Link to="/home" className="flex items-center bg-gray-900 px-2 py-1 rounded">
                     <img
                         src={logo}
@@ -56,7 +53,6 @@ export default function NavBar() {
                         </div>
 
                         {open && (
-                            // <div className="fixed left-5 top-16 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                             <div className="absolute top-full mt-2 left-0 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                                 <div className="flex flex-col items-center py-3 px-2 mt-2">
                                     <div className="w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center mb">
@@ -104,138 +100,3 @@ export default function NavBar() {
         </nav>
     );
 }
-
-
-// {/* Navigation */}
-//             <nav className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
-//                 <div className="max-w-7xl mx-auto px-6 py-5">
-//                     <div className="flex items-center justify-between">
-//                         <div className="text-2xl font-semibold text-gray-900">טיולון</div>
-//                         <div className="flex md:flex items-center gap-12 text-sm">
-//                             <Link to='/trips' className="text-gray-600 hover:text-gray-900 transition-colors">טיולים</Link>
-//                             <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">אודות</a>
-//                             <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">יצירת קשר</a>
-//                         </div>
-//                         {/* <button className="text-sm bg-white/80 text-gray-900 font-medium">התחבר</button> */}
-//                         {user ? (
-//                             // משתמש מחובר
-//                             <div className="relative" ref={menuRef}>
-//                                 <div
-//                                     onClick={(e) => {
-//                                         e.stopPropagation();
-//                                         if (!open) setOpen(true);
-//                                     }}
-//                                     className="w-10 h-10 rounded-full bg-gray-900 text-white relative flex items-center justify-center cursor-pointer select-none overflow-hidden"
-//                                 >
-//                                     {/* {user.firstName.charAt(0)} */}
-//                                     {/* אם יש תמונת פרופיל אמיתית, אפשר לשים <img src={user.avatar} /> */}
-//                                     {/* <User className="w-6 h-6 text-white" /> */}
-//                                     {/* {user.avatar ? (
-//                                         <>
-//                                             <img
-//                                                 src={user.avatar}
-//                                                 alt="Profile"
-//                                                 className="w-full h-full object-cover"
-//                                             />
-//                                             <span className="absolute text-white text-lg font-semibold">
-//                                                 {user.firstName ? user.firstName.charAt(0) : "?"}
-//                                             </span>
-//                                         </>
-//                                     ) :*/}{ user.firstName ? (
-//                                         <span className="text-white text-lg font-semibold">
-//                                             {user.firstName.charAt(0)}
-//                                         </span>
-//                                     ) : (
-//                                         <User className="w-6 h-6 text-white" />
-//                                     )}
-//                                 </div>
-
-
-//                                 {open && (
-//                                     <div className="fixed left-5 top-16 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-//                                         {/* כפתור X */}
-//                                         <button
-//                                             onClick={() => setOpen(false)}
-//                                             className="absolute top-2 left-2 text-gray-500 hover:text-gray-900"
-//                                         >
-//                                             ✕
-//                                         </button>
-//                                         <div className="flex flex-col items-center py-3 px-2 mt-2">
-//                                             {/* עיגול עם אות או תמונה */}
-//                                             <div className="w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center mb overflow-hidden">
-//                                                 {/* {user?.avatar ? (
-//                                                     <>
-//                                                         <img
-//                                                             src={user.avatar}
-//                                                             alt="Profile"
-//                                                             className="w-full h-full object-cover"
-//                                                         />
-//                                                         <span className="absolute text-white text-lg font-semibold">
-//                                                             {user.firstName ? user.firstName.charAt(0) : "?"}
-//                                                         </span>
-//                                                     </>
-//                                                 ) : */}{user.firstName ? (
-//                                                     <span className="text-white text-lg font-semibold">
-//                                                         {user.firstName.charAt(0)}
-//                                                     </span>
-//                                                 ) : (
-//                                                     <User className="w-6 h-6 text-white" />
-//                                                 )}
-//                                             </div>
-//                                             {/* שם המשתמש */}
-//                                             <span className="mt-2 text-sm font-medium text-gray-900">{user?.firstName || "משתמש"} {user?.lastName || ""}</span>
-//                                         </div>
-//                                         {/* פס חיתוך */}
-//                                         <div className="border-t border-gray-200 my-2"></div>
-//                                         <button
-//                                             onClick={() => {
-//                                                 navigate("/me");
-//                                                 setOpen(false);
-//                                             }}
-//                                             className="w-full flex items-center justify-between text-right px-4 py-2 text-sm hover:bg-gray-100"
-//                                         >
-//                                             האזור האישי
-//                                             <User className="w-5 h-5 text-gray-500" />
-//                                         </button>
-
-//                                         <button
-//                                             onClick={() => {
-//                                                 navigate("/my-trips");
-//                                                 setOpen(false);
-//                                             }}
-//                                             className="w-full flex items-center justify-between text-right px-4 py-2 text-sm hover:bg-gray-100"
-//                                         >
-//                                             הטיולים שלי
-//                                             <IoHeartOutline className="w-5 h-5 text-gray-500" />
-//                                         </button>
-
-//                                         <div className="border-t my-1"></div>
-
-//                                         <button
-//                                             onClick={() => {
-//                                                 logout();
-//                                                 setOpen(false);
-//                                             }}
-//                                             className="w-full flex items-center justify-between text-right px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-//                                         >
-//                                             <span>התנתקות</span>
-//                                             <LogOut className="w-4 h-4 text-red-600" />
-//                                         </button>
-//                                     </div>
-//                                 )}
-//                             </div>
-
-
-//                         ) : (
-//                             // משתמש לא מחובר
-//                             <button
-//                                 onClick={() => navigate("/login")}
-//                                 className="group inline-flex items-center gap-3 bg-white/90 text-gray-900 px-6 py-3 rounded-md border border-gray-300 text-sm font-medium hover:bg-gray-50 hover:shadow-lg hover:scale-105 transition-all"
-//                             >
-//                                 התחבר
-//                             </button>
-//                         )}
-
-//                     </div>
-//                 </div>
-//             </nav>

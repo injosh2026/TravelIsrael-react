@@ -187,7 +187,7 @@ export default function PersonalArea() {
                 type: "success",
                 section: "profile",
             });
-        } catch (err) {
+        } catch {
             setAlert({
                 message: "עדכון הפרטים נכשל",
                 type: "error",
@@ -220,15 +220,14 @@ export default function PersonalArea() {
                 currentPassword: passwords.current,
                 newPassword: passwords.newPass,
             }
-            const changePass = await changePassword(password)
-            console.log(changePass)
+            await changePassword(password)
             setPasswords({ current: "", newPass: "", confirm: "" });
             setAlert({
                 message: "הסיסמה עודכנה בהצלחה",
                 type: "success",
                 section: "password",
             });
-        } catch (err) {
+        } catch {
             setAlert({
                 message: "עדכון הסיסמה נכשל",
                 type: "error",

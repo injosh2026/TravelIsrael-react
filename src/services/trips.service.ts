@@ -1,6 +1,7 @@
 import type { DayTripType } from "../types/dayTrip.type";
-import type { DayTripDetailType } from "../types/dayTripDetail.type";
 import type { TripFilterType } from "../types/tripFilter.type";
+import type { RecommendedTripType } from "../types/recommendedTrip.type";
+import type { PlanDataType } from "../pages/TripPlannerWizard";
 import axiosInstance from "./axios";
 
 const url = "DayTrip";
@@ -25,9 +26,13 @@ export const getFilteredTrips = async (filter: TripFilterType): Promise<DayTripT
     }
 };
 
-export const getRecommendedTrips = async (planData: any): Promise<DayTripDetailType[]> => {
-    const response = await axiosInstance.post(`${url}/recommend`, planData);
-    console.log(response.data)
-    return response.data;
+export const getRecommendedTrips = async (planData: PlanDataType): Promise<RecommendedTripType[]> => {
+    try {
+        const response = await axiosInstance.post(`${url}/recommend`, planData);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching recommended trips:', error);
+        throw error;
+    }
 };
 

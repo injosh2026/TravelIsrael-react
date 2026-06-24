@@ -1,12 +1,10 @@
 // src/redux/slices/tripsSlice.ts
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import type { DayTripDetailType } from '../../../types/dayTripDetail.type';
+import type { RecommendedTripType } from '../../../types/recommendedTrip.type';
+import type { PlanDataType } from '../../../pages/TripPlannerWizard';
 import { getRecommendedTrips } from '../../../services/trips.service';
 
-export interface RecommendedTrip {
-    trip: DayTripDetailType;
-    matchPercentage: number;
-}
+export type RecommendedTrip = RecommendedTripType;
 
 interface PlannerState {
     trips: RecommendedTrip[];
@@ -20,27 +18,24 @@ const initialState: PlannerState = {
     error: undefined,
 };
 
-// thunk אסינכרוני שמשתמש בפונקציה שלך
 export const fetchRecommendedTrips = createAsyncThunk<
     RecommendedTrip[],
-    any, // פה נשלח את planData
+    PlanDataType,
     { rejectValue: string }
 >('trips/fetchRecommendedTrips', async (planData, { rejectWithValue }) => {
     try {
         const data = await getRecommendedTrips(planData);
-        // data צריך להיות מערך של { trip: DayTripType, matchPercentage: number }
         return data;
-    } catch (err: any) {
-        return rejectWithValue(err.message || 'Error fetching recommended trips');
+    } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : 'Error fetching recommended trips';
+        return rejectWithValue(message);
     }
 });
 
 const tripsSlice = createSlice({
     name: 'trips',
     initialState,
-    reducers: {
-        // אפשר להוסיף reducers מקומיים אם צריך, למשל לשמור trip נבחר
-    },
+    reducers: {},
     extraReducers: builder => {
         builder
             .addCase(fetchRecommendedTrips.pending, state => {
@@ -53,7 +48,7 @@ const tripsSlice = createSlice({
             })
             .addCase(fetchRecommendedTrips.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload;
+                state.error = action.payload ?? 'Error fetching recommended trips';
             });
     },
 });

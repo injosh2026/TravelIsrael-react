@@ -7,7 +7,13 @@ type Props = {
 }
 
 export default function AdminGuard({ children }: Props) {
-  const isAdmin = useAuthContext().user?.role === 'Admin'
+  const { user, isInitializing } = useAuthContext()
+
+  if (isInitializing) {
+    return <div>טוען...</div>
+  }
+
+  const isAdmin = user?.role === 'Admin'
 
   if (!isAdmin) {
     return <Navigate to="/home" replace />

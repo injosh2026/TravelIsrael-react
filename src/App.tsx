@@ -1,5 +1,4 @@
 import Routes from './routes/router'
-// import './App.css'
 import InitializeAuth from './auth/InitializeAuth'
 import { AuthProvider } from './auth/AuthContext'
 import { Provider } from "react-redux"

@@ -1,4 +1,4 @@
-import { createContext, useState, type ReactNode } from "react"
+import { createContext, useCallback, useState, type ReactNode } from "react"
 import type { UserType } from "../types/user.type"
 import { removeSession } from "./auth.utils"
 
@@ -9,6 +9,8 @@ type AuthStateType = {
 type AuthContextType = AuthStateType & {
   setUser: (user: UserType) => void
   isAuthenticated: boolean
+  isInitializing: boolean
+  finishAuthInit: () => void
   logout: () => void
 }
 
@@ -23,10 +25,15 @@ export const AuthProvider = ({ children }: Props) => {
   const [authState, setAuthState] = useState<AuthStateType>({
     user: null,
   })
+  const [isInitializing, setIsInitializing] = useState(true)
 
   const setUser = (user: UserType) => {
     setAuthState({ user})
   }
+
+  const finishAuthInit = useCallback(() => {
+    setIsInitializing(false)
+  }, [])
 
   const logout = () => {
     setAuthState({ user: null }) // מחיקת המשתמש מהקונטקסט
@@ -39,6 +46,8 @@ export const AuthProvider = ({ children }: Props) => {
         ...authState,
         setUser,
         logout,
+        isInitializing,
+        finishAuthInit,
         isAuthenticated: !!authState.user
       }}
     >

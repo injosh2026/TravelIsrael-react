@@ -8,7 +8,11 @@ type Props = {
 
 export default function AuthGuard({ children }: Props) {
 
-  const { isAuthenticated } = useAuthContext()
+  const { isAuthenticated, isInitializing } = useAuthContext()
+
+  if (isInitializing) {
+    return <div>טוען...</div>
+  }
 
   if (!isAuthenticated) {
     return <Navigate to="/home" replace />

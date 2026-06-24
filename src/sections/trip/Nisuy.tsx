@@ -11,17 +11,12 @@ interface Props {
 
 export default function Nisuy({ trip }: Props) {
 
-    // const [showFullDescription, setShowFullDescription] = useState(false)
-
     const getLink = (stop: any) => {
         if (stop.itemType === 'Route') {
-            // return `/trails/${stop.id}`;
             return `/trailDetails`;
         }
 
-        // return `/locations/${stop.id}`;
         return `/placeDetails`;
-
     };
 
     const stopTimes = useMemo(
@@ -34,20 +29,16 @@ export default function Nisuy({ trip }: Props) {
         [trip]
     )
 
-    // בדיקה דיפנסיבית - אם אין dayTripItems, תראה הודעה או החזר null
     if (!trip.dayTripItems || !Array.isArray(trip.dayTripItems) || trip.dayTripItems.length === 0) {
         return <div className="max-w-7xl mx-auto px-4 md:px-6 pb-24 text-[#6b7280]">לא נמצאו תחנות לטיול</div>
     }
 
     return (
         <>
-            {/* Main Content */}
             < div className="max-w-7xl mx-auto px-4 md:px-6 pb-24" >
                 <div className="gap-12">
-                    {/* Left Column */}
                     <div className="space-y-12">
 
-                        {/* Itinerary */}
                         <section>
                             <h2 className="text-3xl font-light text-[#111827] mb-4">מסלול יומי מפורט</h2>
                             <div className="space-y-8">
@@ -69,7 +60,6 @@ export default function Nisuy({ trip }: Props) {
                                         >
                                             <div key={index} className="border border-[#e5e7eb] rounded-sm overflow-hidden hover:border-[#d1d5db] transition-all">
                                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                                    {/* Image */}
                                                     <div className="md:col-span-1">
                                                         <div className="relative aspect-[4/3] md:aspect-square">
                                                             <img
@@ -86,7 +76,6 @@ export default function Nisuy({ trip }: Props) {
                                                         </div>
                                                     </div>
 
-                                                    {/* Content */}
                                                     <div className="md:col-span-2 p-6">
                                                         <div className="flex items-start justify-between mb-3">
                                                             <div>
@@ -95,15 +84,12 @@ export default function Nisuy({ trip }: Props) {
                                                                     <h3 className="text-2xl font-medium text-[#111827]">{item?.name}</h3>
                                                                 </div>
                                                                 <div className="flex items-center gap-4 text-sm text-[#6b7280]">
-                                                                    {/* שעת הגעה */}
                                                                     <span className="flex items-center gap-1">
                                                                         <Clock className="w-4 h-4" />
                                                                         {stopTimes[index]}
                                                                     </span>
-                                                                    {/* זמן שהייה */}
                                                                     <span>•</span>
                                                                     <span>{formatDuration(stop.estimatedDuration)}</span>
-                                                                    {/* מרחק + אופן הגעה */}
                                                                     {distances[index] && (
                                                                         <>
                                                                             <span>•</span>
@@ -127,7 +113,6 @@ export default function Nisuy({ trip }: Props) {
                             </div>
                         </section>
 
-                        {/* Map Placeholder */}
                         <section>
                             <h2 className="text-3xl font-light text-[#111827] mb-6">מפת הטיול</h2>
                             <div className="bg-[#f9fafb] border border-[#e5e7eb] rounded-sm aspect-video flex items-center justify-center">
@@ -148,31 +133,3 @@ export default function Nisuy({ trip }: Props) {
 
     )
 }
-
-// <section className="max-w-7xl mx-auto px-6 py-16">
-
-//   <h2 className="text-3xl font-light mb-6">
-//     על הטיול
-//   </h2>
-
-//   <p className="text-gray-700 leading-relaxed">
-
-//     {open
-//       ? trip.description
-//       : `${trip.description.slice(0, 200)}...`
-//     }
-
-//   </p>
-
-//   {!open && (
-
-//     <button
-//       onClick={() => setOpen(true)}
-//       className="mt-4 font-medium hover:underline"
-//     >
-//       קרא עוד
-//     </button>
-
-//   )}
-
-// </section>

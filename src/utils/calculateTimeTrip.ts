@@ -238,21 +238,7 @@ export function calculateTotalTripMinutes(trip: DayTripDetailType) {
     // זמן התחנה עצמה
     totalMinutes += current.estimatedDuration
 
-    console.log(current.estimatedDuration);
-    console.log(totalMinutes);
-
-
     const next = stops[i + 1]
-
-    console.log("STOP DEBUG:", {
-      index: i,
-      type: current.place ? "place" : "route",
-      estimatedDuration: current.estimatedDuration,
-      estimatedDurationType: typeof current.estimatedDuration,
-      mode: current.mode,
-      exit: getExitLocation(current),
-      nextExit: next ? getEntryLocation(next) : null
-    })
 
     // אם אין תחנה הבאה → אין זמן מעבר
     if (!next) continue

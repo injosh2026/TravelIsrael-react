@@ -33,8 +33,6 @@ export default function BuildTripPage() {
     const [showAddPanel, setShowAddPanel] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [filterType, setFilterType] = useState('');
-    //   const [history, setHistory] = useState([]);
-    //   const [historyIndex, setHistoryIndex] = useState(-1);
 
     const loadSuggestions = async (search?: string) => {
         try {
@@ -78,24 +76,6 @@ export default function BuildTripPage() {
 
     }, [searchTerm, showAddPanel]);
 
-    useEffect(() => {
-        fetchTripTypes();
-    }, []);
-
-    useEffect(() => {
-        console.log("📍 TRIP META:");
-        console.log(tripMeta);
-
-        console.log("📍 TRIP STOPS:");
-        console.log(tripStops);
-
-        console.log("📍 FULL STRUCTURE:");
-        console.log({
-            meta: tripMeta,
-            stops: tripStops
-        });
-    }, [tripStops, tripMeta]);
-
     const fetchTripTypes = async () => {
         try {
             const res = await getTripTypes();
@@ -104,14 +84,6 @@ export default function BuildTripPage() {
             console.error(err);
         }
     };
-
-    useEffect(() => {
-        if (isEditMode) {
-            fetchTrip();
-        } else {
-            setTripStops([]); // יצירה חדשה
-        }
-    }, [tripId]);
 
     const fetchTrip = async () => {
         try {
@@ -130,8 +102,18 @@ export default function BuildTripPage() {
             console.error('Error loading trip', err);
         }
     };
-    // console.log('Current trip stops:', tripStops);
-    // console.log('Current trip:', trip);
+
+    useEffect(() => {
+        fetchTripTypes();
+    }, []);
+
+    useEffect(() => {
+        if (isEditMode) {
+            fetchTrip();
+        } else {
+            setTripStops([]);
+        }
+    }, [tripId]);
 
     const normalizeModes = (stops: DayTripItemType[], defaultMode: number = 1) => {
         return stops.map((stop, index) => {
@@ -173,8 +155,6 @@ export default function BuildTripPage() {
     // }, 0);
 
     const addSuggestedStop = (stop: SuggestedStopType) => {
-        console.log(stop);
-
         const newStop: DayTripItemType = {
             id: Date.now(), // יצירת ID זמני, יש להחליף ב-ID מהשרת לאחר השמירה
 
@@ -239,7 +219,6 @@ export default function BuildTripPage() {
                     } as any
                     : null
         };
-        console.log("Adding new stop:", newStop);
         setTripStops(prev => {
 
             const updated = [...prev, newStop];
@@ -356,13 +335,7 @@ export default function BuildTripPage() {
                 );
             });
 
-            for (const pair of formData.entries()) {
-                console.log(pair[0], pair[1]);
-            }
-
-            const result = await createTrip(formData);
-
-            console.log("TRIP CREATED:", result);
+            await createTrip(formData);
 
             alert(
                 sendForApproval
