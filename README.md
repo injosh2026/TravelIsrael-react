@@ -4,7 +4,7 @@
 האפליקציה מאפשרת למשתמשים לגלות מסלולים קיימים, לקבל המלצות מותאמות אישית, לבנות טיול משלהם, ולנהל את הפעילות שלהם — עם פאנל ניהול מלא למנהלי המערכת.
 
 > **Repository זה:** [TravelIsrael-react](https://github.com/injosh2026/TravelIsrael-react)  
-> **Backend (.NET 8):** [TravelIsrael-dotnet](https://github.com/injosh2026/TravelIsrael-dotnet) *(בקרוב)*
+> **Backend (.NET 8):** [TravelIsrael-dotnet](https://github.com/injosh2026/TravelIsrael-dotnet)
 
 **פרויקט לימודי** — נבנה בזוגות במסגרת קורס.
 
