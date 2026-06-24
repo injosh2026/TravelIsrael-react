@@ -1,0 +1,43 @@
+import type { AccessibilityType } from "./accessibility.type";
+import type { ApprovalStatusType } from "./approvalStatus.type";
+import type { DifficultyType } from "./difficulty.type";
+import type { ImageType } from "./image.type";
+import type { RegionType } from "./region.type";
+import type { RoutePointType } from "./routePoint.type";
+import type { TypeType } from "./type.type";
+
+export type RouteType = {
+  id: number;
+  name: string;
+  description: string;
+  difficulty: DifficultyType;
+  durationMinutes: number;
+  lengthKm: number;
+  startLatitude: number;
+  startLongitude: number;
+  endLatitude: number;
+  endLongitude: number;
+  region: RegionType;
+  type: TypeType;
+  accessibility: AccessibilityType;
+  price: number;
+  openingTime: string;
+  closingTime: string;
+  minTemperature: number;
+  maxTemperature: number;
+  maxWindSpeed: number;
+  maxRainProbability: number;
+  maxHumidity: number;
+  maxCloudCoverage: number;
+  allowRain: boolean;
+  hasCommonWeather: boolean;
+  averageRating: number;
+  ratingsCount: number;
+  createdByUserId: number;
+  createdAt: Date;
+  approvalStatus: ApprovalStatusType;
+  approvedAt: Date;
+  rejectReason: string;
+  images: ImageType[];
+  routePoints: RoutePointType[];
+}

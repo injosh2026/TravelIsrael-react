@@ -1,0 +1,43 @@
+import type { AccessibilityType } from "./accessibility.type";
+import type { ApprovalStatusType } from "./approvalStatus.type";
+import type { DayTripItemType } from "./dayTripItem.type";
+import type { DifficultyType } from "./difficulty.type";
+import type { RegionType } from "./region.type";
+import type { ReviewType } from "./review.type";
+import type { TypeType } from "./type.type";
+
+export type DayTripDetailType = {
+    id: number;
+    name: string;
+    description: string;
+    image: string;
+    totalDurationHours: number;
+    totalLengthKM: number;
+    type: TypeType;
+    region: RegionType;
+    accessibility: AccessibilityType;
+    difficulty: DifficultyType;
+    price: number;
+    startTime: string;
+    endTime: string;
+    averageRating: number;
+    ratingsCount: number;
+    reviewsCount: number;
+    stopsCount: number;
+    minTemperature: number;
+    maxTemperature: number;
+    maxWindSpeed: number;
+    maxRainProbability: number;
+    maxHumidity: number;
+    maxCloudCoverage: number;
+    allowRain: boolean;
+    hasCommonWeather: boolean;
+    createdByUserId: number;
+    createdAt: Date;
+    approvalStatus: ApprovalStatusType;
+    approvedAt: Date;
+    rejectReason: string;
+    tripHash: string;
+    dayTripItems: DayTripItemType[];
+    reviews: ReviewType[];
+}
